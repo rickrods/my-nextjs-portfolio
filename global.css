@@ -1,6 +1,8 @@
 @import 'tailwindcss';
 
-@config './tailwind.config.js';
+/* @config './tailwind.config.mjs'; - removed to avoid parser errors in environments
+  that don't support Tailwind-specific at-rules. If needed, restore in a
+  Tailwind-aware processor. */
 
 /*
   The default border color has changed to `currentColor` in Tailwind CSS v4,
