@@ -8,10 +8,11 @@ const displayName = data.displayName || username;
 /** @type {import('next').Metadata} */
 export const metadata = {
 	title: {
-		default: [username, '\'s portfolio'].join(""),
-		template: "%s | " + data.displayName + "'s portfolio",
+		//		default: [username, '\'s portfolio'].join(""),
+		default: "Software Development Portfolio",
+		//		template: "%s | " + data.displayName + "'s portfolio",
 	},
-	description: 'GitHub portfolio for ' + displayName,
+	description: `GitHub portfolio for ${displayName}`,
 	robots: {
 		index: true,
 		follow: true,
@@ -30,21 +31,19 @@ export const metadata = {
 			sizes: "any",
 			type: "image/svg+xml",
 		},
-	]
+	],
 };
 const calSans = LocalFont({
 	src: "../public/fonts/CalSans-SemiBold.ttf",
 	variable: "--font-calsans",
 });
 
-export default function RootLayout({
-	children,
-}) {
+export default function RootLayout({ children }) {
 	return (
 		<html lang="en" className={calSans.variable}>
 			<body
 				className={`bg-black ${
-					process.env.NODE_ENV === "development" ? "debug-screens" : ''
+					process.env.NODE_ENV === "development" ? "debug-screens" : ""
 				}`}
 			>
 				{children}
