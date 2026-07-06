@@ -6,11 +6,12 @@ A personal portfolio website built with the latest versions of [Next.js](https:/
 
 ## 🧰 Tech stack
 - **Framework**: [Next.js](https://nextjs.org/) 16.2.10
+- **Runtime**: [Node.js](https://nodejs.org/) 24.x
 - **Deployment**: [Vercel](https://vercel.com)
 - **Styling**: [Tailwind CSS](https://tailwindcss.com) 4.3.1
-- **UI**: [React](https://react.dev/) 19.2.6
+- **UI**: [React](https://react.dev/) 19.2.7
 - **Icons**: [React Icons](https://react-icons.github.io/react-icons/) 5.7.0
-- **Node.js**: 24.x
+
 
 ## ⭐ Features
 - Displays your GitHub profile, organizations, and repositories
@@ -20,18 +21,11 @@ A personal portfolio website built with the latest versions of [Next.js](https:/
 
 ## 💻 Running locally
 
+1. Clone the repository and navigate into the directory:
+
 ```sh
 git clone https://github.com/rickrods/My-Portfolio-App.git
 cd My-Portfolio-App
-npm install 
-npm run dev
-```
-
-#### 🔑 Environment variables
-Create a local environment file from [.env.example](.env.example)
-
-```sh
-cp .env.example .env.local
 ```
 
 Add your tokens to [.env.local](.env.local):
