@@ -1,10 +1,10 @@
-# My GitHub Portfolio
+# My Portfolio Application
 
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/git?repository-url=https%3A%2F%2Fgithub.com%2Fyour-username%2Fyour-repo-name&env=GH_TOKEN,VC_TOKEN)
 
-A personal portfolio website built with [Next.js](https://nextjs.org/), [Tailwind CSS](https://tailwindcss.com/) and deployed to [Vercel](https://vercel.com/). It automatically pulls your GitHub repositories, deployment details, and profile information into a polished landing page.
+A personal portfolio website built with the latest versions of [Next.js](https://nextjs.org/), [Tailwind CSS](https://tailwindcss.com/) and deployed to [Vercel](https://vercel.com/). It automatically pulls your GitHub repositories, deployment details, and profile information into a polished landing page.
 
-## Tech stack
+## 🧰 Tech stack
 - **Framework**: [Next.js](https://nextjs.org/) 16.2.10
 - **Deployment**: [Vercel](https://vercel.com)
 - **Styling**: [Tailwind CSS](https://tailwindcss.com) 4.3.1
@@ -12,21 +12,23 @@ A personal portfolio website built with [Next.js](https://nextjs.org/), [Tailwin
 - **Icons**: [React Icons](https://react-icons.github.io/react-icons/) 5.7.0
 - **Node.js**: 24.x
 
-## Features
+## ⭐ Features
 - Displays your GitHub profile, organizations, and repositories
 - Shows project stats, traffic data, and security alerts when available
 - Includes Vercel deployment information and framework detection
 - Supports a simple search experience for browsing other GitHub users
 
-## Running locally
+## 💻 Running locally
 
 ```sh
-git clone https://github.com/your-username/your-repo-name.git
-cd your-repo-name
+git clone https://github.com/rickrods/My-Portfolio-App.git
+cd My-Portfolio-App
+npm install 
+npm run dev
 ```
 
-### Environment variables
-Create a local environment file from [.env.example](.env.example):
+#### 🔑 Environment variables
+Create a local environment file from [.env.example](.env.example)
 
 ```sh
 cp .env.example .env.local
@@ -44,6 +46,26 @@ VC_TOKEN=YOUR_VERCEL_TOKEN
 
 `GH_TOKEN` is required for the app to build and run successfully.
 
+#### 📝 Configure the app
+Configure github settings for the application in [data.json](data.json) 
+- The `projects` section allows you to feature certain repositories and hide others from your portfolio.
+- Use `heroNames` to list repositories you want to feature, and `blacklist` to list repositories you want to hide.
+
+```json
+{
+	"description": "One of my github accounts, I have multiple",
+	"githubUsername": "rickrods",
+	"avatarUrl": "https://avatars.githubusercontent.com/u/64104643?v=4&size=64",
+	"displayName": "Rickrods",
+	"email": "rickrods@proton.me",
+	"projects": {
+		"blacklist": [],
+		"heroNames": []
+	}
+}
+```
+
+#### ▶️ Run the app
 Then install dependencies and start the development server:
 
 ```sh
@@ -51,9 +73,7 @@ npm install
 npm run dev
 ```
 
-Edit [data.json](data.json) to personalize the site with your own information.
-
-## Deploying to Vercel
+## 🚀 Deploying to Vercel
 
 1. Push this repository to GitHub.
 2. Import it in Vercel.
