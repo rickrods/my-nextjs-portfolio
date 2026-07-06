@@ -27,7 +27,6 @@
 		"@biomejs/biome": "2.5.2",
 		"@tailwindcss/line-clamp": "^0.4.4",
 		"postcss": "^8.5.16",
-		"postcss-nesting": "^14.0.0",
 		"tailwindcss": "^4.3.1"
 	},
 	"allowScripts": {
