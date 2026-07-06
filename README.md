@@ -53,11 +53,11 @@ Configure github settings for the application in [data.json](data.json)
 
 ```json
 {
-	"description": "One of my github accounts, I have multiple",
-	"githubUsername": "rickrods",
-	"avatarUrl": "https://avatars.githubusercontent.com/u/64104643?v=4&size=64",
-	"displayName": "Rickrods",
-	"email": "rickrods@proton.me",
+	"description": "Description of the project github account or organization",
+	"githubUsername": "github-username",
+	"avatarUrl": "Right click on your github avatar and copy url to retrieve",
+	"displayName": "Name to be displayed in the portfolio",
+	"email": "Email address to display in the portfolio",
 	"projects": {
 		"blacklist": [],
 		"heroNames": []
