@@ -39,7 +39,7 @@ const UserText = async ({ promise }) => {
 	);
 };
 
-const TryYourself = ({ customUsername }) => {
+const _TryYourself = ({ customUsername }) => {
 	const href = customUsername ? "/" : "/search";
 
 	return (
@@ -55,34 +55,62 @@ const TryYourself = ({ customUsername }) => {
 };
 
 const LandingComponent = async ({ searchParams: { customUsername } }) => {
-	const username =
-		customUsername || process.env.GITHUB_USERNAME || data.githubUsername;
-	const promise = getUser(username);
+	const username = customUsername || data.githubUsername;
+	const primaryUserPromise = getUser(username);
+
+	let secondaryUserPromise;
+	if (!customUsername && data.secondaryGithubUsername) {
+		secondaryUserPromise = getUser(data.secondaryGithubUsername);
+	}
 
 	return (
 		<div className="flex flex-col items-center justify-center w-screen min-h-screen overflow-y-auto bg-linear-to-tl from-black via-zinc-600/20 to-black">
 			<Navigation />
 			<div className="hidden w-screen h-px animate-glow md:block animate-fade-left bg-linear-to-r from-zinc-300/0 via-zinc-300/50 to-zinc-300/0" />
 
-			<h1 className="flex items-center z-10 text-4xl hover:scale-110 text-transparent duration-1000 cursor-default text-edge-outline animate-title font-display sm:text-6xl md:text-9xl whitespace-nowrap bg-clip-text bg-white p-5">
-				{username}
-				<Suspense fallback={<p>Loading...</p>}>
-					<UserIcon promise={promise} />
-				</Suspense>
-			</h1>
-
+			<div className="flex flex-col items-center justify-center gap-8 my-16 text-center animate-fade-in">
+				<h1 className="flex items-center z-10 text-4xl hover:scale-110 text-transparent duration-1000 cursor-default text-edge-outline animate-title font-display sm:text-6xl md:text-9xl whitespace-nowrap bg-clip-text bg-white p-5">
+					{username}
+					<Suspense fallback={<p>Loading...</p>}>
+						<UserIcon promise={primaryUserPromise} />
+					</Suspense>
+				</h1>
+				<h2 className="text-lg text-zinc-500">
+					<Suspense
+						fallback={<div className="w-full h-px min-h-8">Loading...</div>}
+					>
+						<UserText promise={primaryUserPromise} />
+						<ProfileOrganizations username={username} />
+						<RecentActivity username={username} />
+						<CopilotActivity username={username} />
+					</Suspense>
+				</h2>
+				{secondaryUserPromise && (
+					<>
+						<h1 className="flex items-center z-10 text-4xl hover:scale-110 text-transparent duration-1000 cursor-default text-edge-outline animate-title font-display sm:text-6xl md:text-9xl whitespace-nowrap bg-clip-text bg-white p-5">
+							{data.secondaryGithubUsername}
+							<Suspense fallback={<p>Loading...</p>}>
+								<UserIcon promise={secondaryUserPromise} />
+							</Suspense>
+						</h1>
+						<h2 className="text-lg text-zinc-500">
+							<Suspense
+								fallback={<div className="w-full h-px min-h-8">Loading...</div>}
+							>
+								<UserText promise={secondaryUserPromise} />
+								<ProfileOrganizations username={data.secondaryGithubUsername} />
+							</Suspense>
+						</h2>
+					</>
+				)}
+			</div>
 			<div className="hidden w-screen h-px animate-glow md:block animate-fade-right bg-linear-to-r from-zinc-300/0 via-zinc-300/50 to-zinc-300/0" />
 			<div className="my-16 text-center animate-fade-in">
 				<h2 className="text-lg text-zinc-500">
 					<Suspense
 						fallback={<div className="w-full h-px min-h-28">Loading...</div>}
 					>
-						<div className="w-full h-px min-h-28">
-							<UserText promise={promise} />
-							<ProfileOrganizations username={username} />
-							<RecentActivity username={username} />
-							<CopilotActivity username={username} />
-						</div>
+						<div className="flex flex-col gap-8"></div>
 					</Suspense>
 				</h2>
 			</div>

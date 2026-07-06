@@ -7,5 +7,14 @@
 	"projects": {
 		"blacklist": [],
 		"heroNames": []
+	},
+	"secondaryDescription": "My Second github account",
+	"secondaryGithubUsername": "imstaked",
+	"secondaryAvatarUrl": "https://avatars.githubusercontent.com/u/64104643?v=4&size=64",
+	"secondaryDisplayName": "ImStaked",
+	"secondaryEmail": "imstaked@proton.me",
+	"secondaryProjects": {
+		"blacklist": [],
+		"heroNames": []
 	}
 }

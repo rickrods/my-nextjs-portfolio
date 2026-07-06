@@ -6,7 +6,7 @@ export const ProfileOrganizations = async ({ username }) => {
 
 	return (
 		<p>
-			To view my other github account click on try yourself and enter imstaked{" "}
+			{" "}
 			{/* {
 			organizations?.length > 0 ? <>
 				{" "}at{" "}
