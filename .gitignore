@@ -41,3 +41,5 @@ next-env.d.ts
 # Visual Studio Code
 /.vscode/
 
+# Github
+/.github/
