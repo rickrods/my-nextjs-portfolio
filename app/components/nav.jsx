@@ -1,15 +1,12 @@
 "use client";
 
 import Link from "next/link";
-import { useSearchParams } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import LoadingIndicator from "./loading-indicator";
 
 export const Navigation = () => {
 	const ref = useRef(null);
 	const [isIntersecting, setIntersecting] = useState(true);
-	const searchParams = useSearchParams();
-	const customUsername = searchParams.get("customUsername");
 
 	useEffect(() => {
 		if (!ref.current) return;
@@ -33,7 +30,7 @@ export const Navigation = () => {
 				<div className="container flex flex-row-reverse items-center justify-between p-6 mx-auto">
 					<div className="flex justify-between gap-8 text-base">
 						<Link
-							href={`/projects${customUsername ? `?customUsername=${customUsername}` : ""}`}
+							href="/projects"
 							prefetch={true}
 							className="duration-200 text-zinc-400 hover:text-zinc-100 relative block"
 						>
@@ -42,7 +39,7 @@ export const Navigation = () => {
 							</span>
 						</Link>
 						<Link
-							href={`/contact${customUsername ? `?customUsername=${customUsername}` : ""}`}
+							href="/contact"
 							prefetch={true}
 							className="duration-200 text-zinc-400 hover:text-zinc-100 relative block"
 						>

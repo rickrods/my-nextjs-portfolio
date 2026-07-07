@@ -1109,6 +1109,13 @@ export const getProjectsPageData = unstable_cache(
 			vercel: vercelProjectsByName.get(repo.name),
 		}));
 
+		const blacklist =
+			username &&
+			data.secondaryGithubUsername &&
+			username.toLowerCase() === data.secondaryGithubUsername.toLowerCase()
+				? data.secondaryProjects.blacklist
+				: data.projects.blacklist;
+
 		const heroes = repositoriesWithVercel
 			.filter((project) => pinnedNames.includes(project.name))
 			.sort((a, b) => b.stargazers_count - a.stargazers_count);
@@ -1117,7 +1124,7 @@ export const getProjectsPageData = unstable_cache(
 			.filter((p) => !p.fork)
 			.filter((p) => !p.archived)
 			.filter((p) => !pinnedNames.includes(p.name))
-			.filter((p) => !data.projects.blacklist.includes(p.name))
+			.filter((p) => !blacklist.includes(p.name))
 			.sort(
 				(a, b) =>
 					new Date(b.updated_at ?? Number.POSITIVE_INFINITY).getTime() -

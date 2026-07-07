@@ -5,7 +5,12 @@
 	"displayName": "Rickrods",
 	"email": "rickrods@proton.me",
 	"projects": {
-		"blacklist": ["chain-crypto-com-tools", "MINA-BP", "Ubuntu-Scripts"],
+		"blacklist": [
+			"chain-crypto-com-tools",
+			"MINA-BP",
+			"Ubuntu-Scripts",
+			"POKT-block-check"
+		],
 		"heroNames": [
 			"My-Portfolio-App",
 			"arweave-record-the-bch-blockch",
@@ -23,6 +28,7 @@
 	"secondaryProjects": {
 		"blacklist": [
 			"Unbelievable-Story-Blog",
+			"mantra-chain-testnet-validator-setup",
 			"Pictures-1",
 			"Black-Book",
 			"OraiChain-Ansible-Node",
@@ -35,7 +41,8 @@
 			"ubuntu-automation",
 			"bitcanna-node-setup",
 			"BlastAPI",
-			"Linux-Scripts"
+			"Linux-Scripts",
+			"orai_documentation"
 		],
 		"heroNames": [
 			"canton-network-api-bash-client",
@@ -45,9 +52,7 @@
 			"Node_Setup_Guides",
 			"blockchain_node_monitoring_and_alerts",
 			"Ansible-Nodes",
-			"mantra-chain-testnet-validator-setup",
 			"MantraChain-Testnet",
-			"orai_documentation",
 			"Infrastructure_Tools",
 			"near-shardnet-stakewarsiii",
 			"arthera_devnet"
