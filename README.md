@@ -53,8 +53,8 @@ Configure github settings for the application in [data.json](data.json)
 	"displayName": "Name to be displayed in the portfolio",
 	"email": "Email address to display in the portfolio",
 	"projects": {
-		"blacklist": [],
-		"heroNames": []
+		"blacklist": ["repo-to-hide-1", "repo-to-hide-2"],
+		"heroNames": ["featured-repo-1", "featured-repo-2"]
 	}
 }
 ```

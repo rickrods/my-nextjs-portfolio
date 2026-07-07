@@ -15,6 +15,10 @@ const CODEX_GRAPHQL_BATCH_SIZE = 10;
 const CLAUDE_GRAPHQL_BATCH_SIZE = 10;
 const PORTFOLIO_OWNER_USERNAME =
 	process.env.GITHUB_USERNAME || data.githubUsername;
+const ownedUsernames = [
+	PORTFOLIO_OWNER_USERNAME,
+	data.secondaryGithubUsername,
+].filter(Boolean);
 
 function cloneFallbackValue(fallback) {
 	if (
@@ -28,14 +32,23 @@ function cloneFallbackValue(fallback) {
 	return structuredClone(fallback);
 }
 
-function getGitHubHeaders(extraHeaders = {}) {
+function getGitHubHeaders(username, extraHeaders = {}) {
 	const headers = {
 		Accept: "application/vnd.github+json",
 		...extraHeaders,
 	};
 
-	if (process.env.GH_TOKEN) {
-		headers.Authorization = `Bearer ${process.env.GH_TOKEN}`;
+	const isSecondary =
+		username &&
+		data.secondaryGithubUsername &&
+		username.toLowerCase() === data.secondaryGithubUsername.toLowerCase();
+
+	const token = isSecondary
+		? process.env.SECONDARY_GH_TOKEN
+		: process.env.GH_TOKEN;
+
+	if (token) {
+		headers.Authorization = `token ${token}`;
 	}
 
 	return headers;
@@ -55,10 +68,16 @@ async function fetchGitHubResponse(
 	{ context, fallback = null, method = "GET", body, headers, next } = {},
 ) {
 	try {
+		const requestOwner =
+			headers?.owner ||
+			(url.startsWith(GITHUB_API_URL)
+				? new URL(url).pathname.split("/")[2]
+				: undefined);
+
 		const res = await fetch(url, {
 			method,
 			body,
-			headers: getGitHubHeaders(headers),
+			headers: getGitHubHeaders(requestOwner, headers),
 			next,
 		});
 		const contentType = res.headers.get("content-type") || "";
@@ -178,11 +197,12 @@ function getRepositoryKey(project) {
 	return project.full_name ?? `${project.owner?.login}/${project.name}`;
 }
 
-function isOwnedRepository(project, username) {
+function isOwnedRepository(project) {
 	return Boolean(
-		username &&
-			project.owner?.login &&
-			project.owner.login.toLowerCase() === username.toLowerCase(),
+		project.owner?.login &&
+			ownedUsernames.some(
+				(name) => name.toLowerCase() === project.owner.login.toLowerCase(),
+			),
 	);
 }
 
@@ -331,15 +351,16 @@ export const getUser = unstable_cache(
 
 export const getRepos = unstable_cache(
 	async (username) => {
+		const timerLabel = `getRepos:${username}`;
 		console.log("Fetching repos for", username);
-		console.time("getRepos");
+		console.time(timerLabel);
 		const response = await fetchPaginatedGitHubArray(
 			`${GITHUB_API_URL}/users/${username}/repos?per_page=100`,
 			{
 				context: `repositories for ${username}`,
 			},
 		);
-		console.timeEnd("getRepos");
+		console.timeEnd(timerLabel);
 		return response;
 	},
 	(username) => ["getRepos", username],
@@ -366,8 +387,9 @@ export const getSocialAccounts = unstable_cache(
 
 export const getPinnedRepos = unstable_cache(
 	async (username) => {
+		const timerLabel = `getPinnedRepos:${username}`;
 		console.log("Fetching pinned repos for", username);
-		console.time("getPinnedRepos");
+		console.time(timerLabel);
 		const pinned = await fetchGitHubGraphQL(
 			`
         query GetPinnedRepos($username: String!) {
@@ -388,7 +410,7 @@ export const getPinnedRepos = unstable_cache(
 				fallback: { user: { pinnedItems: { nodes: [] } } },
 			},
 		);
-		console.timeEnd("getPinnedRepos");
+		console.timeEnd(timerLabel);
 		return (
 			pinned.user?.pinnedItems?.nodes
 				?.map((node) => node?.name)
@@ -401,8 +423,9 @@ export const getPinnedRepos = unstable_cache(
 
 export const getUserOrganizations = unstable_cache(
 	async (username) => {
+		const timerLabel = `getUserOrganizations:${username}`;
 		console.log("Fetching organizations for", username);
-		console.time("getUserOrganizations");
+		console.time(timerLabel);
 		const orgs = await fetchGitHubGraphQL(
 			`
         query GetUserOrganizations($username: String!) {
@@ -425,7 +448,7 @@ export const getUserOrganizations = unstable_cache(
 				fallback: { user: { organizations: { nodes: [] } } },
 			},
 		);
-		console.timeEnd("getUserOrganizations");
+		console.timeEnd(timerLabel);
 		return { data: orgs };
 	},
 	(username) => ["getUserOrganizations", username],
@@ -438,8 +461,9 @@ export const getVercelProjects = unstable_cache(
 			console.log("No Vercel token found - no projects will be shown.");
 			return { projects: [] };
 		}
+		const timerLabel = `getVercelProjects:${Date.now()}:${Math.random().toString(36).slice(2)}`;
 		console.log("Fetching Vercel projects");
-		console.time("getVercelProjects");
+		console.time(timerLabel);
 
 		const baseUrl = "https://api.vercel.com/v9/projects";
 		const limit = 100;
@@ -481,7 +505,7 @@ export const getVercelProjects = unstable_cache(
 			console.error("Vercel API fetch failed:", error);
 			return { projects: [] };
 		} finally {
-			console.timeEnd("getVercelProjects");
+			console.timeEnd(timerLabel);
 		}
 	},
 	["getVercelProjects"],
@@ -695,6 +719,7 @@ export const getTrafficPageViews = unstable_cache(
 			{
 				context: `traffic views for ${username}/${reponame}`,
 				fallback: null,
+				owner: username,
 			},
 		);
 
@@ -727,6 +752,7 @@ export const getDependabotAlerts = unstable_cache(
 				context: `Dependabot alerts for ${username}/${reponame}`,
 				fallback: null,
 				next: { revalidate: HOURS_12 },
+				owner: username,
 			},
 		);
 
@@ -995,9 +1021,7 @@ async function getRepositoryVercelDetails(
 }
 
 async function enrichProjectsForCards(projects) {
-	const ownerProjects = projects.filter((project) =>
-		isOwnedRepository(project, PORTFOLIO_OWNER_USERNAME),
-	);
+	const ownerProjects = projects.filter(isOwnedRepository);
 	const hasVercelProjects = projects.some((project) => project.vercel);
 	const [copilotPRCounts, codexCounts, claudeCounts, nextjsLatestRelease] =
 		await Promise.all([
@@ -1010,7 +1034,7 @@ async function enrichProjectsForCards(projects) {
 	return Promise.all(
 		projects.map(async (project) => {
 			const repoOwner = project.owner?.login;
-			const isOwnerRepo = isOwnedRepository(project, PORTFOLIO_OWNER_USERNAME);
+			const isOwnerRepo = isOwnedRepository(project);
 			const [views, openAlertsBySeverity, vercelDetails] = await Promise.all([
 				isOwnerRepo && repoOwner
 					? getTrafficPageViews(repoOwner, project.name)

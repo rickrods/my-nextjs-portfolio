@@ -5,8 +5,15 @@
 	"displayName": "Rickrods",
 	"email": "rickrods@proton.me",
 	"projects": {
-		"blacklist": [],
-		"heroNames": []
+		"blacklist": ["chain-crypto-com-tools", "MINA-BP", "Ubuntu-Scripts"],
+		"heroNames": [
+			"My-Portfolio-App",
+			"arweave-record-the-bch-blockch",
+			"ai-meme-genius",
+			"GitMind",
+			"nextjs-blog-template",
+			"docs"
+		]
 	},
 	"secondaryDescription": "My Second github account",
 	"secondaryGithubUsername": "imstaked",
@@ -14,7 +21,36 @@
 	"secondaryDisplayName": "ImStaked",
 	"secondaryEmail": "imstaked@proton.me",
 	"secondaryProjects": {
-		"blacklist": [],
-		"heroNames": []
+		"blacklist": [
+			"Unbelievable-Story-Blog",
+			"Pictures-1",
+			"Black-Book",
+			"OraiChain-Ansible-Node",
+			"splice",
+			"artela-docs",
+			"network-indexer-services",
+			"onefilellm",
+			"cess",
+			"oraid_ansible",
+			"ubuntu-automation",
+			"bitcanna-node-setup",
+			"BlastAPI",
+			"Linux-Scripts"
+		],
+		"heroNames": [
+			"canton-network-api-bash-client",
+			"canton-typescript-api",
+			"kde-bluetooth-internet",
+			"Pathrock-Share",
+			"Node_Setup_Guides",
+			"blockchain_node_monitoring_and_alerts",
+			"Ansible-Nodes",
+			"mantra-chain-testnet-validator-setup",
+			"MantraChain-Testnet",
+			"orai_documentation",
+			"Infrastructure_Tools",
+			"near-shardnet-stakewarsiii",
+			"arthera_devnet"
+		]
 	}
 }
