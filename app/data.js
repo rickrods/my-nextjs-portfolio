@@ -565,7 +565,7 @@ export const getVercelProjects = unstable_cache(
 			console.error("Vercel API fetch failed:", error);
 			return { projects: [] };
 		} finally {
-			console.timeEnd(timerLabel);
+			// Timer removed for cleanup
 		}
 	},
 	["getVercelProjects"],

@@ -30,6 +30,15 @@ export const Navigation = () => {
 				<div className="container flex flex-row-reverse items-center justify-between p-6 mx-auto">
 					<div className="flex justify-between gap-8 text-base">
 						<Link
+							href="/about"
+							prefetch={true}
+							className="duration-200 text-zinc-400 hover:text-zinc-100 relative block"
+						>
+							<span className="inline-flex items-center">
+								About <LoadingIndicator />
+							</span>
+						</Link>
+						<Link
 							href="/projects"
 							prefetch={true}
 							className="duration-200 text-zinc-400 hover:text-zinc-100 relative block"
