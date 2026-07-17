@@ -2,7 +2,7 @@
 
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/git?repository-url=https%3A%2F%2Fgithub.com%2Fyour-username%2Fyour-repo-name&env=GH_TOKEN,VC_TOKEN)
 
-A personal portfolio website built with the latest versions of [Next.js](https://nextjs.org/), [Tailwind CSS](https://tailwindcss.com/) and deployed to [Vercel](https://vercel.com/). It automatically pulls your GitHub repositories, deployment details, and profile information into a polished landing page.
+A personal portfolio website built with the latest versions of [Next.js](https://nextjs.org/), [Tailwind CSS](https://tailwindcss.com/) and deployed to [Vercel](https://vercel.com/). It automatically pulls your GitHub repositories, deployment details, and profile information into a polished landing page. Modified from [Original](https://github.com/jirihofman/portfolio)
 
 ## 🧰 Tech stack
 - **Framework**: [Next.js](https://nextjs.org/) 16.2.10
