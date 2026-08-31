@@ -50,7 +50,7 @@ const _TryYourself = ({ customUsername }) => {
 
 const UserBlurb = ({ username, userPromise, description, fallbackName }) => {
 	return (
-		<div className="flex flex-col gap-4 text-center p-4 pt-12 rounded-xl border border-zinc-800 hover:border-zinc-400/50 transition-all duration-500 w-full md:w-1/2 lg:w-2/5">
+		<div className="flex flex-col gap-4 text-center p-4 pt-6 rounded-xl border border-zinc-800 hover:border-zinc-400/50 transition-all duration-500 w-full md:w-[65%] lg:w-[65%]">
 			<Link href={`/projects?customUsername=${username}`}>
 				<Suspense
 					fallback={
@@ -59,11 +59,11 @@ const UserBlurb = ({ username, userPromise, description, fallbackName }) => {
 				>
 					<UserIcon promise={userPromise} />
 				</Suspense>
-				<h1 className="z-10 text-3xl text-transparent duration-1000 cursor-default text-edge-outline animate-title font-display sm:text-4xl md:text-5xl whitespace-nowrap bg-clip-text bg-white mt-10">
+				<h1 className="z-10 text-3xl text-transparent duration-1000 cursor-default text-edge-outline animate-title font-display sm:text-4xl md:text-5xl whitespace-nowrap bg-clip-text bg-white mt-6">
 					{username}
 				</h1>
 			</Link>
-			<div className="text-sm text-zinc-400 space-y-2 min-h-[12rem]">
+			<div className="text-sm text-zinc-400 space-y-2 min-h-32">
 				<Suspense
 					fallback={
 						<div className="space-y-2">
