@@ -33,6 +33,9 @@ cd My-Portfolio-App
 Add your tokens to [.env.local](.env.local):
 
 ```sh
+# Your email address for contact form
+EMAIL_ADDRESS=YOUR_EMAIL_ADDRESS
+
 # Required for build-time GitHub data requests
 GH_TOKEN=YOUR_GH_TOKEN
 

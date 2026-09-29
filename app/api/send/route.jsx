@@ -2,6 +2,7 @@ import { Resend } from "resend";
 import { EmailTemplate } from "./../../components/email-template";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
+const EMAIL_ADDRESS = process.env.EMAIL_ADDRESS;
 
 export async function POST(request) {
 	try {
@@ -33,7 +34,7 @@ export async function POST(request) {
 		// === Send Email ===
 		const { data, error } = await resend.emails.send({
 			from: "Contact Form <onboarding@resend.dev>", // Use your verified domain
-			to: ["you@yourdomain.com"], // Change to your email
+			to: [EMAIL_ADDRESS], // Change to your email
 			subject: `New Contact Form Message from ${firstName}`,
 			react: EmailTemplate({
 				firstName,

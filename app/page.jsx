@@ -111,7 +111,6 @@ const LandingComponent = async ({ searchParams: { customUsername } }) => {
 		<div className="flex flex-col items-center justify-center w-screen min-h-screen overflow-y-auto bg-linear-to-tl from-black via-zinc-600/20 to-black">
 			<Navigation />
 			<div className="hidden w-screen h-px animate-glow md:block animate-fade-left bg-linear-to-r from-zinc-300/0 via-zinc-300/50 to-zinc-300/0" />
-			<br /> <br /> <br /> <br />
 			<Hero />
 			<div className="hidden w-screen h-px animate-glow md:block animate-fade-in bg-linear-to-r from-zinc-300/0 via-zinc-300/50 to-zinc-300/0" />
 			<div className="my-16 animate-fade-in">
