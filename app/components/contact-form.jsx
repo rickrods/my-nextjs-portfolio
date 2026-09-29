@@ -101,7 +101,7 @@ export default function ContactForm() {
 			{/* Turnstile */}
 			<div className="flex justify-center">
 				<Turnstile
-					sitekey={process.env.TURNSTILE_SITE_KEY}
+					sitekey={process.env.TURNSTILE_SITE_KEY} as string
 					onVerify={(token) => setTurnstileToken(token)}
 					onError={() => setTurnstileToken(null)}
 					onExpire={() => setTurnstileToken(null)}
