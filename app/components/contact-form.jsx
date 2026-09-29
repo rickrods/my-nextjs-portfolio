@@ -9,7 +9,6 @@ export default function ContactForm() {
 		email: "",
 		message: "",
 	});
-	const [NEXT_PUBLIC_TURNSTILE_SITE_KEY] = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY;
 	const [loading, setLoading] = useState(false);
 	const [status, setStatus] = useState("");
 	const [turnstileToken, setTurnstileToken] = useState(null);
@@ -101,7 +100,7 @@ export default function ContactForm() {
 			{/* Turnstile */}
 			<div className="flex justify-center">
 				<Turnstile
-					sitekey={NEXT_PUBLIC_TURNSTILE_SITE_KEY}
+					sitekey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY}
 					onVerify={(token) => setTurnstileToken(token)}
 					onError={() => setTurnstileToken(null)}
 					onExpire={() => setTurnstileToken(null)}
